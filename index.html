@@ -7,20 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="alternate icon" type="image/png" href="assets/favicon.png">
-  <!-- Social preview -->
-  <meta property="og:title" content="Yafi Zain – Portfolio" />
-  <meta property="og:description" content="Graphic Design · Motion Graphics · Video Editing · Audio Engineering" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/og-image.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Yafi Zain – Portfolio" />
-  <meta name="twitter:description" content="Graphic Design · Motion Graphics · Video Editing · Audio Engineering" />
-  <meta name="twitter:image" content="assets/og-image.jpg" />
   <title>Portfolio – Yafizain</title>
-  <meta name="description" content="Graphic Design · Motion Graphics · Video Editing · Audio Engineering" />
+  <meta name="description" content="Graphic Design · Motion Graphics · Video Editing · Sound Design" />
   <style>
     :root{
       --bg: #0b0c0f;
@@ -47,7 +35,7 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font:16px/1.65 'Poppins', system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;  
+      margin:0; font:16px/1.65 'Poppins', system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
       color:var(--ink); background:
       radial-gradient(circle at 50% 50%, rgb(var(--halo)/0.55) 0%, rgb(var(--halo)/0.35) 35%, rgb(var(--halo)/0) 70%),
       var(--bg);
@@ -57,7 +45,7 @@
     }
     a{color:var(--accent); text-decoration:none}
     a:hover{text-decoration:underline}
-    .wrap{max-width:980px; margin:auto; padding:32px 20px 56px; position:relative; z-index:1} 
+    .wrap{max-width:980px; margin:auto; padding:32px 20px 56px; position:relative; z-index:1}
     header{display:flex; flex-wrap:wrap; align-items:flex-end; gap:6px 12px; border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:24px}
     h1{font-weight:800; letter-spacing:.2px; margin:0; font-size:clamp(28px,5vw,40px)}
     .tag{color:var(--muted)}
@@ -81,9 +69,10 @@
     @media (min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
     @media (min-width:900px){.grid{grid-template-columns:repeat(4,1fr)}}
     figure{margin:0}
-    .thumb{width:100%; height:0; padding-bottom:70%; object-fit:cover; border-radius:10px; display:block; background:#222; border:1px solid var(--line)}
     .cap{font-size:12px; color:var(--muted); margin-top:4px}
-    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}    /* Lightbox modal */
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+
+    /* Lightbox modal */
     dialog#lightbox{width:min(92vw, 980px); border:1px solid var(--line); background:var(--panel); padding:0; border-radius:14px; color:var(--ink)}
     dialog::backdrop{background:rgb(0 0 0 / .65)}
     .lb-head{display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-bottom:1px solid var(--line)}
@@ -94,7 +83,7 @@
     .pill{display:inline-block; font-size:12px; padding:4px 8px; border:1px solid var(--line); border-radius:999px; color:var(--muted)}
     .split{display:flex; align-items:center; justify-content:space-between; gap:10px}
 
-    /* --- Modern Swipe Slider (scroll-snap) --- */
+    /* Slider */
     .slider{position:relative}
     .slider-viewport{display:grid; grid-auto-flow:column; grid-auto-columns:80%; gap:10px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-behavior:smooth; padding:4px 2px 10px}
     @media (min-width:640px){ .slider-viewport{ grid-auto-columns:calc((100% - 10px)/2); } }
@@ -109,12 +98,31 @@
     .dot{width:8px; height:8px; border-radius:999px; background:var(--line)}
     .dot.active{background:var(--accent)}
 
-    /* --- Masonry layout for Posters & Logos --- */
+    /* Masonry */
     .masonry{column-count:2; column-gap:12px}
     @media (min-width:640px){ .masonry{column-count:3} }
     @media (min-width:900px){ .masonry{column-count:4} }
     .masonry figure{break-inside:avoid; -webkit-column-break-inside:avoid; margin:0 0 12px}
-    .thumb-auto{width:100%; height:auto; display:block; border-radius:10px; background:#222; border:1px solid var(--line)}
+
+    /* thumbnails: motion thumbnails use .thumb (fixed ratio); posters/logos use .thumb-auto (natural ratio) */
+    .thumb{
+      width:100%;
+      display:block;
+      aspect-ratio:16/9;     /* change to 4/3 or 3/2 if you prefer */
+      object-fit:cover;
+      border-radius:10px;
+      background:#222;
+      border:1px solid var(--line);
+    }
+    .thumb-auto{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:10px;
+      background:#222;
+      border:1px solid var(--line);
+      object-fit:cover;
+    }
 
     /* Hero */
     .hero{display:grid; grid-template-columns:96px 1fr; gap:16px; align-items:center; margin-bottom:22px}
@@ -141,35 +149,23 @@
       .info-list{justify-content:center}
       .socials{justify-content:center}
     }
-    .toggle{appearance:none; border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:999px; padding:6px 10px; cursor:pointer}
-    .toggle:hover{border-color:var(--accent)}
-      /* Subtle noise texture overlay */
-    .grain{position:fixed; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:multiply; z-index:0;
-      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.5"/></svg>');
-      background-size:120px 120px;
-    }
-      /* Spacing polish */
+
+    /* Spacing + motion */
     section{padding:18px 0 12px; border-bottom:1px dashed var(--line)}
     header{padding-bottom:16px; margin-bottom:22px}
     h2{margin:10px 0 10px}
     .cap{margin-top:6px}
-
-    /* Hover + motion */
     :where(a,.chip,.slider-btn,details.gallery>summary,button){transition:all .2s ease}
     .chip:hover{transform:translateY(-1px); box-shadow:0 4px 14px rgb(0 0 0 / .15)}
-    .slider-btn:hover{transform:scale(1.06)}
-    details.gallery>summary:hover{color:var(--accent)}
     img.thumb, img.thumb-auto{transition:transform .25s ease, box-shadow .25s ease}
     img.thumb:hover, img.thumb-auto:hover{transform:translateY(-2px); box-shadow:0 8px 22px rgb(0 0 0 / .25)}
     :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:8px}
-
-    /* Animations */
     @keyframes fadeIn{from{opacity:0} to{opacity:1}}
     @keyframes rise{from{transform:translateY(6px); opacity:0} to{transform:none; opacity:1}}
     .hero, header, section{animation:fadeIn .5s ease both}
     .masonry figure, .card{animation:rise .4s ease both}
 
-    /* Contact form */
+    /* Contact */
     .contact{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px}
     .contact form{display:grid; gap:12px}
     .row{display:grid; gap:12px}
@@ -181,8 +177,6 @@
     .cta{justify-self:start; appearance:none; border:1px solid var(--line); background:var(--accent); color:var(--bg); border-radius:999px; padding:10px 16px; cursor:pointer; font-weight:700}
     .cta:hover{filter:brightness(1.05)}
     @media (max-width:639px){ .cta{justify-self:stretch; text-align:center} }
-
-    /* Responsive polish */
     @media (max-width:480px){ .wrap{padding:18px 14px 48px} }
   </style>
 </head>
@@ -275,7 +269,6 @@ My life has been enriched with explorations in the realm of science and technolo
         <li>Basecamp Space Café &amp; Live Music — Graphic Designer, Audio Engineer, Event Planner</li>
         <li>Super Music | Dare to Perform — Graphic Designer, Event Planner, Audio Engineer</li>
       </ul>
-
     </section>
 
     <section id="business">
@@ -302,7 +295,6 @@ My life has been enriched with explorations in the realm of science and technolo
         <summary>Design Graphics</summary>
         <div class="gallery-body">
           <div class="masonry" id="gallery-posters">
-            <!-- Using lightweight placeholder thumbnails that link to the Behance project pages -->
             <figure>
               <a href="https://www.behance.net/gallery/237676395/Music-Event-Poster" target="_blank" rel="noopener">
                 <img class="thumb-auto" loading="lazy" src="assets/posters/poster1.jpg" alt="Music Event Poster 01 — open on Behance" />
@@ -318,8 +310,8 @@ My life has been enriched with explorations in the realm of science and technolo
             </figure>
 
             <figure>
-              <a href="assets/posters/poster3.jpg" target="_blank" rel="noopener">
-                <img class="thumb-auto" loading="lazy" src="https://via.placeholder.com/800x1100?text=Design+Graphics+03" alt="Music Event Poster 03 — open on Behance" />
+              <a href="https://www.behance.net/gallery/237676349/Music-Event-Poster" target="_blank" rel="noopener">
+                <img class="thumb-auto" loading="lazy" src="assets/posters/poster3.jpg" alt="Music Event Poster 03 — open on Behance" />
               </a>
               <figcaption class="cap">Music Event Poster — Behance</figcaption>
             </figure>
@@ -339,15 +331,15 @@ My life has been enriched with explorations in the realm of science and technolo
             </figure>
 
             <figure>
-              <a href="assets/posters/poster6.jpg" target="_blank" rel="noopener">
-                <img class="thumb-auto" loading="lazy" src="https://via.placeholder.com/800x1100?text=Design+Graphics+06" alt="Company t-shirt design — open on Behance" />
+              <a href="https://www.behance.net/gallery/237676113/Company-t-shirt-design" target="_blank" rel="noopener">
+                <img class="thumb-auto" loading="lazy" src="assets/posters/poster6.jpg" alt="Company t-shirt design — open on Behance" />
               </a>
               <figcaption class="cap">Company T-shirt Design — Behance</figcaption>
             </figure>
 
             <figure>
-              <a href="assets/posters/poster7.jpg" target="_blank" rel="noopener">
-                <img class="thumb-auto" loading="lazy" src="https://via.placeholder.com/800x1100?text=Design+Graphics+07" alt="Poster — open on Behance" />
+              <a href="https://www.behance.net/gallery/237675775/Spolin-Dukes-Prison-Poetry-Contest-Announcement" target="_blank" rel="noopener">
+                <img class="thumb-auto" loading="lazy" src="assets/posters/poster7.jpg" alt="Poster — open on Behance" />
               </a>
               <figcaption class="cap">Poster — Behance</figcaption>
             </figure>
@@ -362,7 +354,6 @@ My life has been enriched with explorations in the realm of science and technolo
         <div class="gallery-body">
           <div class="slider" data-gallery="motion">
             <div class="slider-viewport" id="gallery-motion">
-              <!-- YouTube items: thumbnails use YouTube's thumbnail URL format and will open in the lightbox as embedded players -->
               <figure class="card">
                 <img class="thumb lb" loading="lazy"
                      src="assets/motion/motion1.jpg"
@@ -383,17 +374,16 @@ My life has been enriched with explorations in the realm of science and technolo
                 <img class="thumb lb" loading="lazy"
                      src="assets/motion/motion3.jpg"
                      alt="Motion 03"
-                     data-full="https://youtube.com/shorts/sF5WvZSIhk0?si=mtvoC0FO-rXZ0QKg" />
-                <figcaption class="cap">Motion – YT Short · <a href="https://youtube.com/shorts/sF5WvZSIhk0?si=mtvoC0FO-rXZ0QKg" target="_blank" rel="noopener">Watch on YouTube</a></figcaption>
+                     data-full="https://www.youtube.com/watch?v=fvDfYSWg0TU" />
+                <figcaption class="cap">Motion – 03 · <a href="https://www.youtube.com/watch?v=fvDfYSWg0TU" target="_blank" rel="noopener">Watch on YouTube</a></figcaption>
               </figure>
 
               <!-- Instagram reel: open in new tab (embedding reels may be limited) -->
               <figure class="card">
-                <a class="lb" href="https://www.instagram.com/reel/DPbULLQgeAH/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">
+                <a class="" href="https://www.instagram.com/reel/DPbULLQgeAH/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">
                   <img class="thumb" loading="lazy"
                        src="assets/motion/motion4.jpg"
-                       alt="Instagram Reel — open in new tab"
-                       />
+                       alt="Instagram Reel — open in new tab" />
                 </a>
                 <figcaption class="cap">Motion – IG Reel · <a href="https://www.instagram.com/reel/DPbULLQgeAH/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">Open on Instagram</a></figcaption>
               </figure>
@@ -426,7 +416,6 @@ My life has been enriched with explorations in the realm of science and technolo
     <section id="contact">
       <h2>Contact</h2>
       <div class="contact">
-        <!-- Keep mailto (you can change to Formspree later) -->
         <form action="mailto:yafizain.work@gmail.com" method="GET">
           <div class="row">
             <div class="field">
@@ -466,16 +455,14 @@ My life has been enriched with explorations in the realm of science and technolo
     <div class="lb-body">
       <img id="lb-image" class="lb-img" alt="Preview" style="display:none" />
       <video id="lb-video" class="lb-img" controls style="display:none"></video>
-      <!-- iframe embeds injected by script when needed -->
     </div>
   </dialog>
 
   <script>
-    // Current year (if you want to show dynamic year anywhere)
+    // Current year helper (unused element optional)
     (function(){var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();})();
 
     // Lightbox logic (supports images, direct video files, YouTube, Vimeo).
-    // Behance and Instagram links will open in a new tab (they're not embedded).
     const dlg = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-image');
     const lbVid = document.getElementById('lb-video');
@@ -516,7 +503,7 @@ My life has been enriched with explorations in the realm of science and technolo
       const existingIframe = container.querySelector('iframe');
       if(existingIframe) existingIframe.remove();
 
-      // direct YouTube
+      // YouTube embed
       if(isYouTube(src)){
         const iframe = document.createElement('iframe');
         iframe.setAttribute('src', youtubeEmbedUrl(src));
@@ -531,7 +518,7 @@ My life has been enriched with explorations in the realm of science and technolo
         return;
       }
 
-      // Vimeo
+      // Vimeo embed
       if(isVimeo(src)){
         const iframe = document.createElement('iframe');
         iframe.setAttribute('src', vimeoEmbedUrl(src));
@@ -550,6 +537,8 @@ My life has been enriched with explorations in the realm of science and technolo
       if(/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)){
         lbImg.style.display = 'none';
         lbVid.style.display = 'block';
+        // remove any existing iframe
+        if(existingIframe) existingIframe.remove();
         lbVid.src = src;
         lbVid.load();
         lbVid.play().catch(()=>{});
@@ -558,7 +547,7 @@ My life has been enriched with explorations in the realm of science and technolo
         return;
       }
 
-      // fallback: treat as image
+      // fallback: image
       lbVid.pause && lbVid.pause();
       lbVid.removeAttribute('src');
       lbVid.style.display = 'none';
@@ -573,26 +562,30 @@ My life has been enriched with explorations in the realm of science and technolo
       try{ dlg.close(); }catch{ dlg.removeAttribute('open'); }
       lbVid.pause && lbVid.pause();
       lbVid.removeAttribute('src');
-      // remove iframe if present
       const container = dlg.querySelector('.lb-body');
       const existingIframe = container.querySelector('iframe');
       if(existingIframe) existingIframe.remove();
       lbImg.style.display = 'none';
     }
 
+    // Only intercept intended thumbnail clicks (.lb OR elements with data-full).
+    // Allow normal anchor navigation for links intentionally set to open in new tab.
     document.addEventListener('click', (e)=>{
-      // if clicked element or closest ancestor has data-full or href we use that
-      const t = e.target.closest && e.target.closest('.lb, [data-full], a[href]');
-      if(!t) return;
-      // Prioritize data-full; then href for anchors; then img src
-      let src = null;
-      if(t.getAttribute && t.getAttribute('data-full')) src = t.getAttribute('data-full');
-      else if(t.tagName === 'A' && t.href) src = t.href;
-      else if(t.src) src = t.src;
+      const thumb = e.target.closest && e.target.closest('.lb, [data-full]');
+      if(!thumb) return;
+
+      // If this is an anchor with target="_blank" (external), let it open normally
+      const anchor = thumb.tagName === 'A' ? thumb : thumb.closest && thumb.closest('a[target="_blank"]');
+      if(anchor && anchor.getAttribute && anchor.getAttribute('target') === '_blank'){
+        // allow default (open in new tab)
+        return;
+      }
+
+      // Prefer data-full, then href, then src
+      let src = thumb.getAttribute && (thumb.getAttribute('data-full') || thumb.getAttribute('href') || thumb.src);
       if(!src) return;
-      // ignore normal navigation on anchors when handled
-      const alt = t.getAttribute && (t.getAttribute('data-alt') || t.getAttribute('alt') || t.textContent.trim());
-      // If anchor is external Behance/Instagram, allow default when target blank; we already handle opening above
+      const alt = thumb.getAttribute && (thumb.getAttribute('data-alt') || thumb.getAttribute('alt') || thumb.textContent.trim() || '');
+
       openLightbox(src, alt);
       e.preventDefault();
     });
@@ -601,29 +594,8 @@ My life has been enriched with explorations in the realm of science and technolo
     document.getElementById('lb-close').addEventListener('click', closeLightbox);
     dlg.addEventListener('click', (e)=>{ if(e.target === dlg) closeLightbox(); });
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLightbox(); });
-  </script>
 
-  <script>
-    // Theme toggle with localStorage
-    (function(){
-      const root = document.documentElement;
-      const btn = document.getElementById('themeToggle');
-      const saved = localStorage.getItem('theme');
-      if(saved){ root.setAttribute('data-theme', saved); }
-      function label(){ btn.textContent = root.getAttribute('data-theme') === 'light' ? 'Dark Mode' : 'Light Mode'; }
-      label();
-      btn.addEventListener('click', ()=>{
-        const current = root.getAttribute('data-theme');
-        const next = current === 'light' ? 'dark' : 'light';
-        root.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-        label();
-      });
-    })();
-  </script>
-
-  <script>
-    // --- Slider init (scroll-snap + buttons + dots) ---
+    // Slider init (unchanged core behavior)
     function initSlider(slider){
       const viewport = slider.querySelector('.slider-viewport');
       const cards = [...viewport.querySelectorAll('.card')];
@@ -685,8 +657,39 @@ My life has been enriched with explorations in the realm of science and technolo
       ro.observe(viewport);
       buildDots();
     }
-
     document.querySelectorAll('.slider').forEach(initSlider);
+
+    // Theme toggle with localStorage — robust initial state + clear button label
+    (function(){
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+
+      // Determine initial theme: saved -> prefer -> default dark
+      const saved = localStorage.getItem('theme');
+      if(saved === 'light' || saved === 'dark'){
+        root.setAttribute('data-theme', saved);
+      } else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches){
+        root.setAttribute('data-theme', 'light');
+      } else {
+        root.setAttribute('data-theme', 'dark');
+      }
+
+      function setLabel(){
+        const current = root.getAttribute('data-theme');
+        btn.textContent = current === 'light' ? 'Switch to Dark' : 'Switch to Light';
+        btn.setAttribute('aria-pressed', current === 'light' ? 'false' : 'true');
+      }
+
+      setLabel();
+
+      btn.addEventListener('click', ()=>{
+        const current = root.getAttribute('data-theme');
+        const next = current === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        setLabel();
+      });
+    })();
   </script>
 </body>
 </html>
