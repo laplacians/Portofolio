@@ -27,34 +27,22 @@
       --panel:#12141a;
       --ink:#e8e9ee;
       --muted:#a9afbf;
-      --accent:#ffffff; /* dark mode accent switched to ice white */
+      --accent:#ffffff;
       --line:#1e2230;
-      --icon:#e8e9ee; /* unified icon color */
-      /* halo color as R G B for radial background */
+      --icon:#e8e9ee;
       --halo: 22 27 40;
     }
     @media (prefers-color-scheme: light){
       :root{
-        --bg:#F5F5F5; /* clean light background */
-        --panel:#FFFFFF; /* crisper ice white panels */
+        --bg:#F5F5F5;
+        --panel:#FFFFFF;
         --ink:#101218;
         --muted:#4a5163;
-        --accent:#111111; /* charcoal accent for links/buttons */
+        --accent:#111111;
         --line:#E6E6E6;
-        --icon:#111111; /* premium icon color */
-        --halo: 245 245 245; /* subtle halo */
+        --icon:#111111;
+        --halo: 245 245 245;
       }
-    }
-    }
-    }
-
-    /* Manual theme overrides */
-    :root[data-theme="dark"]{
-      --bg:#0b0c0f; --panel:#12141a; --ink:#e8e9ee; --muted:#a9afbf; --accent:#ffffff; --line:#1e2230; --icon:#e8e9ee; --halo:22 27 40;
-    }
-    :root[data-theme="light"]{
-      --bg:#F5F5F5; --panel:#FFFFFF; --ink:#101218; --muted:#4a5163; --accent:#111111; --line:#E6E6E6; --icon:#111111; --halo:245 245 245;
-    }
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -204,8 +192,9 @@
     <div class="topbar">
       <button id="themeToggle" class="toggle" aria-label="Toggle theme">Toggle Theme</button>
     </div>
+
     <section id="hero" class="hero">
-      <img class="avatar" src="assets/profile.jpg" alt="Portrait of Yafi Zain" />
+      <img class="avatar" src="assets/potrait.jpg" alt="Yafi Zain" />
       <div>
         <h1>Yafi Zain</h1>
         <p class="role"> Hello, you can call me Yafizain.
@@ -226,7 +215,7 @@ My life has been enriched with explorations in the realm of science and technolo
           </li>
           <li>
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
-            <a href="https://www.website.com" target="_blank" rel="noopener">www.website.com</a>
+            <a href="https://www.youtube.com/@les-laplaciens" target="_blank" rel="noopener">YouTube Channel</a>
           </li>
         </ul>
         <div class="socials">
@@ -239,17 +228,18 @@ My life has been enriched with explorations in the realm of science and technolo
             WhatsApp
           </a>
           <a class="chip" href="https://www.instagram.com/_yafizain/" target="_blank" rel="noopener">Instagram</a>
-          <a class="chip" href="https://behance.com/yourhandle" target="_blank" rel="noopener">Behance</a>
+          <a class="chip" href="https://www.behance.net/yafizain" target="_blank" rel="noopener">Behance</a>
           <a class="chip" href="https://www.youtube.com/@les-laplaciens" target="_blank" rel="noopener">YouTube</a>
           <a class="chip" href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </section>
+
     <header>
       <h2>Skills</h2>
-    </div> 
       <span class="pill">Graphic Design · Motion Graphics · Video Editing · Audio Engineering.</span>
-  </div>
+    </header>
+
     <section id="skills">
       <h2>Tools</h2>
       <div class="socials" aria-label="Tools I use" style="font-size:13px;gap:6px 8px">
@@ -285,16 +275,11 @@ My life has been enriched with explorations in the realm of science and technolo
         <li>Basecamp Space Café &amp; Live Music — Graphic Designer, Audio Engineer, Event Planner</li>
         <li>Super Music | Dare to Perform — Graphic Designer, Event Planner, Audio Engineer</li>
       </ul>
-      <ul>
-      <h3>Media partner &amp; Creative Support <span class="meta">(2021 – Present)</span></h3>
-      <ul>
-        <li>Rock In Solo | Feat Stupidic Extreme Vocal - 2022 </li>
-      </ul>
-      
+
+    </section>
+
     <section id="business">
       <h2>Business Services</h2>
-      <h3>TRVE Darkness Prod — Shoe Treatments <span class="meta">(Owner, 2019–Present)</span></h3>
-      <p>Small business specializing in professional shoe care and restoration.</p>
       <h3>LVRA Studio — Digital Creative Services <span class="meta">(Owner, 2023–Present)</span></h3>
       <p>Providing branding, motion graphics, and media production.</p>
     </section>
@@ -302,7 +287,7 @@ My life has been enriched with explorations in the realm of science and technolo
     <section id="apprenticeship">
       <h2>Apprenticeship</h2>
       <ul>
-        <li>Asian Bird Watching Program — Participant</li>
+        <li>Asian WaterBird Census — Participant</li>
       </ul>
     </section>
 
@@ -312,49 +297,107 @@ My life has been enriched with explorations in the realm of science and technolo
         <span class="tag">Click a menu to expand</span>
       </div>
 
-      <!-- POSTER GALLERY -->
+      <!-- DESIGN GRAPHICS (Posters) -->
       <details class="gallery">
-        <summary>Posters</summary>
+        <summary>Design Graphics</summary>
         <div class="gallery-body">
           <div class="masonry" id="gallery-posters">
+            <!-- Using lightweight placeholder thumbnails that link to the Behance project pages -->
             <figure>
-              <img class="thumb-auto lb" loading="lazy" src="assets/posters/poster1.jpg" alt="Poster design 1" data-full="assets/posters/poster1.jpg" />
-              <figcaption class="cap">Poster – 01</figcaption>
+              <a href="https://www.behance.net/gallery/237676395/Music-Event-Poster" target="_blank" rel="noopener">
+                <img class="thumb-auto" loading="lazy" src="assets/posters/poster1.jpg" alt="Music Event Poster 01 — open on Behance" />
+              </a>
+              <figcaption class="cap">Music Event Poster — Behance</figcaption>
             </figure>
+
             <figure>
-              <img class="thumb-auto lb" loading="lazy" src="assets/posters/poster2.jpg" alt="Poster design 2" data-full="assets/posters/poster2.jpg" />
-              <figcaption class="cap">Poster – 02</figcaption>
+              <a href="https://www.behance.net/gallery/237676311/Music-Event-Poster" target="_blank" rel="noopener">
+                <img class="thumb-auto" loading="lazy" src="assets/posters/poster2.jpg" alt="Music Event Poster 02 — open on Behance" />
+              </a>
+              <figcaption class="cap">Music Event Poster — Behance</figcaption>
             </figure>
+
             <figure>
-              <img class="thumb-auto lb" loading="lazy" src="assets/posters/poster3.jpg" alt="Poster design 3" data-full="assets/posters/poster3.jpg" />
-              <figcaption class="cap">Poster – 03</figcaption>
+              <a href="assets/posters/poster3.jpg" target="_blank" rel="noopener">
+                <img class="thumb-auto" loading="lazy" src="https://via.placeholder.com/800x1100?text=Design+Graphics+03" alt="Music Event Poster 03 — open on Behance" />
+              </a>
+              <figcaption class="cap">Music Event Poster — Behance</figcaption>
             </figure>
+
             <figure>
-              <img class="thumb-auto lb" loading="lazy" src="assets/posters/poster4.jpg" alt="Poster design 4" data-full="assets/posters/poster4.jpg" />
-              <figcaption class="cap">Poster – 04</figcaption>
+              <a href="https://www.behance.net/gallery/237676265/Music-Event-Poster" target="_blank" rel="noopener">
+                <img class="thumb-auto" loading="lazy" src="assets/posters/poster4.jpg" alt="Music Event Poster 04 — open on Behance" />
+              </a>
+              <figcaption class="cap">Music Event Poster — Behance</figcaption>
             </figure>
+
+            <figure>
+              <a href="https://www.behance.net/gallery/237676219/Music-Event-Poster" target="_blank" rel="noopener">
+                <img class="thumb-auto" loading="lazy" src="assets/posters/poster5.jpg" alt="Music Event Poster 05 — open on Behance" />
+              </a>
+              <figcaption class="cap">Music Event Poster — Behance</figcaption>
+            </figure>
+
+            <figure>
+              <a href="assets/posters/poster6.jpg" target="_blank" rel="noopener">
+                <img class="thumb-auto" loading="lazy" src="https://via.placeholder.com/800x1100?text=Design+Graphics+06" alt="Company t-shirt design — open on Behance" />
+              </a>
+              <figcaption class="cap">Company T-shirt Design — Behance</figcaption>
+            </figure>
+
+            <figure>
+              <a href="assets/posters/poster7.jpg" target="_blank" rel="noopener">
+                <img class="thumb-auto" loading="lazy" src="https://via.placeholder.com/800x1100?text=Design+Graphics+07" alt="Poster — open on Behance" />
+              </a>
+              <figcaption class="cap">Poster — Behance</figcaption>
+            </figure>
+
           </div>
         </div>
       </details>
 
-      <!-- MOTION GRAPHICS GALLERY -->
+      <!-- MOTION GRAPHICS (YouTube + Instagram) -->
       <details class="gallery">
         <summary>Motion Graphics</summary>
         <div class="gallery-body">
           <div class="slider" data-gallery="motion">
             <div class="slider-viewport" id="gallery-motion">
+              <!-- YouTube items: thumbnails use YouTube's thumbnail URL format and will open in the lightbox as embedded players -->
               <figure class="card">
-                <img class="thumb" loading="lazy" src="assets/motion/motion1.jpg" alt="Motion graphics 1" data-full="assets/motion/motion1.mp4" />
-                <figcaption class="cap">Motion – 01 · <a href="#" aria-label="Open external video">Watch</a></figcaption>
+                <img class="thumb lb" loading="lazy"
+                     src="assets/motion/motion1.jpg"
+                     alt="Motion 01"
+                     data-full="https://www.youtube.com/watch?v=MCGaalzSTSQ" />
+                <figcaption class="cap">Motion – 01 · <a href="https://www.youtube.com/watch?v=MCGaalzSTSQ" target="_blank" rel="noopener">Watch on YouTube</a></figcaption>
               </figure>
+
               <figure class="card">
-                <img class="thumb" loading="lazy" src="assets/motion/motion2.jpg" alt="Motion graphics 2" data-full="assets/motion/motion2.mp4" />
-                <figcaption class="cap">Motion – 02 · <a href="#" aria-label="Open external video">Watch</a></figcaption>
+                <img class="thumb lb" loading="lazy"
+                     src="assets/motion/motion2.jpg"
+                     alt="Motion 02"
+                     data-full="https://www.youtube.com/watch?v=xhc2SEhIdkY" />
+                <figcaption class="cap">Motion – 02 · <a href="https://www.youtube.com/watch?v=xhc2SEhIdkY" target="_blank" rel="noopener">Watch on YouTube</a></figcaption>
               </figure>
+
               <figure class="card">
-                <img class="thumb" loading="lazy" src="assets/motion/motion3.jpg" alt="Motion graphics 3" data-full="assets/motion/motion3.mp4" />
-                <figcaption class="cap">Motion – 03 · <a href="#" aria-label="Open external video">Watch</a></figcaption>
+                <img class="thumb lb" loading="lazy"
+                     src="assets/motion/motion3.jpg"
+                     alt="Motion 03"
+                     data-full="https://youtube.com/shorts/sF5WvZSIhk0?si=mtvoC0FO-rXZ0QKg" />
+                <figcaption class="cap">Motion – YT Short · <a href="https://youtube.com/shorts/sF5WvZSIhk0?si=mtvoC0FO-rXZ0QKg" target="_blank" rel="noopener">Watch on YouTube</a></figcaption>
               </figure>
+
+              <!-- Instagram reel: open in new tab (embedding reels may be limited) -->
+              <figure class="card">
+                <a class="lb" href="https://www.instagram.com/reel/DPbULLQgeAH/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">
+                  <img class="thumb" loading="lazy"
+                       src="assets/motion/motion4.jpg"
+                       alt="Instagram Reel — open in new tab"
+                       />
+                </a>
+                <figcaption class="cap">Motion – IG Reel · <a href="https://www.instagram.com/reel/DPbULLQgeAH/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener">Open on Instagram</a></figcaption>
+              </figure>
+
             </div>
             <div class="slider-nav">
               <button class="slider-btn prev" aria-label="Previous">‹</button>
@@ -365,33 +408,26 @@ My life has been enriched with explorations in the realm of science and technolo
         </div>
       </details>
 
-      <!-- LOGO GALLERY -->
+      <!-- LOGO GALLERY (single item) -->
       <details class="gallery">
         <summary>Logo</summary>
         <div class="gallery-body">
           <div class="masonry" id="gallery-logos">
             <figure>
-              <img class="thumb-auto lb" loading="lazy" src="assets/logos/logo1.jpg" alt="Logo 1" data-full="assets/logos/logo1.jpg" />
+              <img class="thumb-auto lb" loading="lazy" src="https://via.placeholder.com/800x800?text=Logo+01" alt="Logo 01" data-full="https://via.placeholder.com/1200x1200?text=Logo+01" />
               <figcaption class="cap">Logo – 01</figcaption>
-            </figure>
-            <figure>
-              <img class="thumb-auto lb" loading="lazy" src="assets/logos/logo2.jpg" alt="Logo 2" data-full="assets/logos/logo2.jpg" />
-              <figcaption class="cap">Logo – 02</figcaption>
-            </figure>
-            <figure>
-              <img class="thumb-auto lb" loading="lazy" src="assets/logos/logo3.jpg" alt="Logo 3" data-full="assets/logos/logo3.jpg" />
-              <figcaption class="cap">Logo – 03</figcaption>
             </figure>
           </div>
         </div>
       </details>
+
     </section>
 
     <section id="contact">
       <h2>Contact</h2>
       <div class="contact">
-        <!-- For a backend-free submit, replace action with your Formspree endpoint or keep mailto: -->
-        <form action="mailto:yourname@email.com" method="GET">
+        <!-- Keep mailto (you can change to Formspree later) -->
+        <form action="mailto:yafizain.work@gmail.com" method="GET">
           <div class="row">
             <div class="field">
               <label for="name">Your Name</label>
@@ -413,7 +449,7 @@ My life has been enriched with explorations in the realm of science and technolo
 
     <section id="youtube">
       <h2>YouTube</h2>
-      <p>Visit my channel: <a href="https://www.youtube.com" target="_blank" rel="noopener"> 	www.youtube.com/@les-laplaciens</a></p>
+      <p>Visit my channel: <a href="https://www.youtube.com/@les-laplaciens" target="_blank" rel="noopener">www.youtube.com/@les-laplaciens</a></p>
     </section>
 
     <section id="footnote">
@@ -428,57 +464,144 @@ My life has been enriched with explorations in the realm of science and technolo
       <button class="btn" id="lb-close" aria-label="Close">Close</button>
     </div>
     <div class="lb-body">
-      <img id="lb-image" class="lb-img" alt="Preview" />
+      <img id="lb-image" class="lb-img" alt="Preview" style="display:none" />
       <video id="lb-video" class="lb-img" controls style="display:none"></video>
+      <!-- iframe embeds injected by script when needed -->
     </div>
   </dialog>
 
   <script>
-    // Current year
+    // Current year (if you want to show dynamic year anywhere)
     (function(){var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();})();
 
-    // Lightbox logic (supports images and mp4)
+    // Lightbox logic (supports images, direct video files, YouTube, Vimeo).
+    // Behance and Instagram links will open in a new tab (they're not embedded).
     const dlg = document.getElementById('lightbox');
     const lbImg = document.getElementById('lb-image');
     const lbVid = document.getElementById('lb-video');
     const lbTitle = document.getElementById('lb-title');
 
+    function isYouTube(url){
+      return /(?:youtube\.com\/watch\?v=|youtu\.be\/)/i.test(url);
+    }
+    function isVimeo(url){
+      return /vimeo\.com\/\d+/i.test(url);
+    }
+    function isBehance(url){
+      return /behance\.net/i.test(url);
+    }
+    function isInstagram(url){
+      return /instagram\.com/i.test(url);
+    }
+    function youtubeEmbedUrl(url){
+      const m = url.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{4,})/);
+      return m ? `https://www.youtube.com/embed/${m[1]}?autoplay=1&rel=0` : null;
+    }
+    function vimeoEmbedUrl(url){
+      const m = url.match(/vimeo\.com\/(\d+)/);
+      return m ? `https://player.vimeo.com/video/${m[1]}?autoplay=1` : null;
+    }
+
     function openLightbox(src, alt){
-      const isVideo = /\.(mp4|webm|ogg)$/i.test(src);
-      if(isVideo){
+      alt = alt || '';
+
+      // If behance or instagram links, open in new tab (embedding is unreliable)
+      if(isBehance(src) || isInstagram(src)){
+        window.open(src, '_blank', 'noopener');
+        return;
+      }
+
+      // Clear previous iframe if any
+      const container = dlg.querySelector('.lb-body');
+      const existingIframe = container.querySelector('iframe');
+      if(existingIframe) existingIframe.remove();
+
+      // direct YouTube
+      if(isYouTube(src)){
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('src', youtubeEmbedUrl(src));
+        iframe.setAttribute('frameborder','0');
+        iframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
+        iframe.setAttribute('allowfullscreen','');
+        iframe.style.width = '100%';
+        iframe.style.height = 'min(62vh, 560px)';
+        container.appendChild(iframe);
+        lbTitle.textContent = alt || 'YouTube Video';
+        if(typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open','');
+        return;
+      }
+
+      // Vimeo
+      if(isVimeo(src)){
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('src', vimeoEmbedUrl(src));
+        iframe.setAttribute('frameborder','0');
+        iframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
+        iframe.setAttribute('allowfullscreen','');
+        iframe.style.width = '100%';
+        iframe.style.height = 'min(62vh, 560px)';
+        container.appendChild(iframe);
+        lbTitle.textContent = alt || 'Vimeo Video';
+        if(typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open','');
+        return;
+      }
+
+      // direct video file
+      if(/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)){
         lbImg.style.display = 'none';
         lbVid.style.display = 'block';
-        lbVid.src = src; lbVid.play().catch(()=>{});
+        lbVid.src = src;
+        lbVid.load();
+        lbVid.play().catch(()=>{});
         lbTitle.textContent = alt || 'Video';
-      } else {
-        lbVid.pause(); lbVid.removeAttribute('src'); lbVid.load();
-        lbVid.style.display = 'none';
-        lbImg.style.display = 'block';
-        lbImg.src = src; lbImg.alt = alt || 'Image';
-        lbTitle.textContent = alt || 'Image';
+        if(typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open','');
+        return;
       }
-      if(typeof dlg.showModal === 'function') dlg.showModal();
-      else dlg.setAttribute('open','');
+
+      // fallback: treat as image
+      lbVid.pause && lbVid.pause();
+      lbVid.removeAttribute('src');
+      lbVid.style.display = 'none';
+      lbImg.style.display = 'block';
+      lbImg.src = src;
+      lbImg.alt = alt || 'Image';
+      lbTitle.textContent = alt || 'Image';
+      if(typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open','');
     }
 
     function closeLightbox(){
-      try{dlg.close();}catch{dlg.removeAttribute('open');}
-      lbVid.pause();
+      try{ dlg.close(); }catch{ dlg.removeAttribute('open'); }
+      lbVid.pause && lbVid.pause();
+      lbVid.removeAttribute('src');
+      // remove iframe if present
+      const container = dlg.querySelector('.lb-body');
+      const existingIframe = container.querySelector('iframe');
+      if(existingIframe) existingIframe.remove();
+      lbImg.style.display = 'none';
     }
 
     document.addEventListener('click', (e)=>{
-      const t = e.target;
-      if(t && t.classList && t.classList.contains('lb')){
-        const src = t.getAttribute('data-full') || t.src;
-        const alt = t.getAttribute('alt') || '';
-        openLightbox(src, alt);
-      }
+      // if clicked element or closest ancestor has data-full or href we use that
+      const t = e.target.closest && e.target.closest('.lb, [data-full], a[href]');
+      if(!t) return;
+      // Prioritize data-full; then href for anchors; then img src
+      let src = null;
+      if(t.getAttribute && t.getAttribute('data-full')) src = t.getAttribute('data-full');
+      else if(t.tagName === 'A' && t.href) src = t.href;
+      else if(t.src) src = t.src;
+      if(!src) return;
+      // ignore normal navigation on anchors when handled
+      const alt = t.getAttribute && (t.getAttribute('data-alt') || t.getAttribute('alt') || t.textContent.trim());
+      // If anchor is external Behance/Instagram, allow default when target blank; we already handle opening above
+      openLightbox(src, alt);
+      e.preventDefault();
     });
 
+    // Close handlers
     document.getElementById('lb-close').addEventListener('click', closeLightbox);
     dlg.addEventListener('click', (e)=>{ if(e.target === dlg) closeLightbox(); });
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLightbox(); });
-    </script>
+  </script>
 
   <script>
     // Theme toggle with localStorage
@@ -500,7 +623,7 @@ My life has been enriched with explorations in the realm of science and technolo
   </script>
 
   <script>
-    // --- Slider init (scroll-snap + buttons + dots) (scroll-snap + buttons + dots) ---
+    // --- Slider init (scroll-snap + buttons + dots) ---
     function initSlider(slider){
       const viewport = slider.querySelector('.slider-viewport');
       const cards = [...viewport.querySelectorAll('.card')];
@@ -509,7 +632,6 @@ My life has been enriched with explorations in the realm of science and technolo
       const dotsBox = slider.querySelector('.slider-dots');
 
       function perView(){
-        // estimate how many cards are visible from first card width
         if(cards.length === 0) return 1;
         const cardW = cards[0].getBoundingClientRect().width || 1;
         const vw = viewport.clientWidth || 1;
@@ -531,11 +653,9 @@ My life has been enriched with explorations in the realm of science and technolo
         viewport.scrollBy({left: delta * vw, behavior:'smooth'});
       }
 
-      // buttons
-      prev.addEventListener('click', ()=> go(-1));
-      next.addEventListener('click', ()=> go(1));
+      prev && prev.addEventListener('click', ()=> go(-1));
+      next && next.addEventListener('click', ()=> go(1));
 
-      // dots
       function buildDots(){
         dotsBox.innerHTML = '';
         const p = pages();
@@ -557,7 +677,6 @@ My life has been enriched with explorations in the realm of science and technolo
       }
 
       viewport.addEventListener('scroll', ()=>{
-        // throttle via rAF
         if(viewport._raf) cancelAnimationFrame(viewport._raf);
         viewport._raf = requestAnimationFrame(updateDots);
       }, {passive:true});
