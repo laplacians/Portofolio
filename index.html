@@ -14,39 +14,12 @@
       --muted:#a9afbf;
       --accent:#ffffff;
       --line:#1e2230;
-      --icon:#e8e9ee;
       --halo:22 27 40;
     }
-
-    :root[data-theme="light"]{
-      --bg:#F5F5F5;
-      --panel:#FFFFFF;
-      --ink:#101218;
-      --muted:#4a5163;
-      --accent:#111111;
-      --line:#E6E6E6;
-      --icon:#111111;
-      --halo:245 245 245;
-    }
-
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font:16px/1.65 'Poppins',system-ui;
-      color:var(--ink);
-      background:
-        radial-gradient(circle at 50% 50%, rgb(var(--halo)/0.55) 0%, rgb(var(--halo)/0.35) 35%, rgb(var(--halo)/0) 70%),
-        var(--bg);
-      background-attachment:fixed;
-    }
+    body{margin:0;font:16px/1.65 'Poppins',system-ui;background:radial-gradient(circle at 50% 50%, rgb(var(--halo)/0.55) 0%, rgb(var(--halo)/0.35) 35%, rgb(var(--halo)/0) 70%),var(--bg);color:var(--ink)}
     a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:980px;margin:auto;padding:32px 20px 56px}
-
-    /* Topbar / Theme toggle */
+    .wrap{max-width:980px;margin:0 auto;padding:32px 20px 56px}
     .topbar{display:flex;justify-content:flex-end;margin-bottom:8px}
-    .toggle{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:6px 10px;cursor:pointer}
-    .toggle:hover{border-color:var(--accent)}
 
     /* Hero */
     .hero{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;margin-bottom:22px}
@@ -57,52 +30,32 @@
     .socials{margin-top:10px;display:flex;flex-wrap:wrap;gap:10px}
     .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line);border-radius:999px}
 
-    /* Gallery containers */
+    /* Galleries */
     details.gallery{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:14px 0;overflow:hidden}
-    details.gallery>summary{cursor:pointer;list-style:none;padding:14px 16px;display:flex;align-items:center;gap:10px;font-weight:700}
+    details.gallery>summary{cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;font-weight:700}
     details.gallery>summary::-webkit-details-marker{display:none}
-    details.gallery>summary:after{content:"▾";margin-left:auto;transition:transform .2s ease}
+    details.gallery>summary:after{content:"▾";margin-left:auto;transition:transform .2s}
     details.gallery[open]>summary:after{transform:rotate(180deg)}
     .gallery-body{padding:0 16px 16px}
     .cap{font-size:12px;color:var(--muted);margin-top:6px}
 
-    /* Masonry for posters & logos */
+    /* Masonry */
     .masonry{column-count:2;column-gap:12px}
     @media(min-width:640px){.masonry{column-count:3}}
     @media(min-width:900px){.masonry{column-count:4}}
-    .masonry figure{break-inside:avoid;margin:0 0 12px}
+    .masonry figure{break-inside:avoid;margin:0 0 12px;position:relative}
 
-    /* Uniform poster cards */
-    .thumb-auto{
-      width:100%;
-      aspect-ratio:3/4;
-      object-fit:cover;
-      border-radius:10px;
-      background:#222;
-      border:1px solid var(--line);
-      display:block;
-    }
+    /* Uniform poster card wrapper: 3:4 tiles */
+    .card-wrapper{width:100%;aspect-ratio:3/4;border-radius:10px;overflow:hidden;display:block;background:#222;border:1px solid var(--line)}
+    .card-wrapper img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
 
     /* Motion thumbnails (16:9) */
-    .thumb{
-      width:100%;
-      aspect-ratio:16/9;
-      object-fit:cover;
-      border-radius:10px;
-      background:#222;
-      border:1px solid var(--line);
-      display:block;
-    }
-
-    /* Lightbox */
-    dialog#lightbox{width:min(92vw,980px);border:1px solid var(--line);background:var(--panel);padding:0;border-radius:14px;color:var(--ink)}
-    dialog::backdrop{background:rgb(0 0 0 / .65)}
-    .lb-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line)}
-    .lb-body{padding:8px 12px 14px}
-    .lb-img{width:100%;height:auto;border-radius:10px}
+    .motion-card{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#222;border:1px solid var(--line);position:relative;display:block}
+    .motion-card img{width:100%;height:100%;display:block;object-fit:cover}
+    .play-overlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:rgb(0 0 0 / .45);border:2px solid rgba(255,255,255,.12)}
+    .play-overlay svg{width:22px;height:22px;fill:var(--accent)}
 
     /* Slider */
-    .slider{position:relative}
     .slider-viewport{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 10px}
     @media(min-width:640px){.slider-viewport{grid-auto-columns:calc((100% - 10px)/2)}}
     @media(min-width:900px){.slider-viewport{grid-auto-columns:calc((100% - 20px)/3)}}
@@ -113,16 +66,20 @@
     .dot{width:8px;height:8px;border-radius:999px;background:var(--line)}
     .dot.active{background:var(--accent)}
 
+    /* Lightbox */
+    dialog#lightbox{width:min(92vw,980px);border:1px solid var(--line);background:var(--panel);padding:0;border-radius:14px;color:var(--ink)}
+    dialog::backdrop{background:rgb(0 0 0 / .65)}
+    .lb-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line)}
+    .lb-body{padding:8px 12px 14px}
+    .lb-img{width:100%;height:auto;border-radius:10px}
+
     @media(max-width:480px){.wrap{padding:18px 14px 48px}}
   </style>
 </head>
 <body>
   <main class="wrap">
-    <div class="topbar">
-      <button id="themeToggle" class="toggle" aria-label="Toggle theme">Toggle Theme</button>
-    </div>
-
-    <section id="hero" class="hero">
+    <!-- Hero -->
+    <section class="hero">
       <img class="avatar" src="assets/potrait.jpg" alt="Yafi Zain" />
       <div>
         <h1>Yafi Zain</h1>
@@ -135,111 +92,192 @@
         </ul>
         <div class="socials">
           <a class="chip" href="mailto:yafizain.work@gmail.com">Email</a>
-          <a class="chip" href="https://wa.me/6281225705615?text=Hi%20Yafi">WhatsApp</a>
-          <a class="chip" href="https://www.instagram.com/_yafizain/" target="_blank">Instagram</a>
-          <a class="chip" href="https://www.behance.net/yafizain" target="_blank">Behance</a>
-          <a class="chip" href="https://www.linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+          <a class="chip" href="https://wa.me/6281225705615?text=Hi%20Yafi" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="chip" href="https://www.instagram.com/_yafizain/" target="_blank" rel="noopener">Instagram</a>
+          <a class="chip" href="https://www.behance.net/yafizain" target="_blank" rel="noopener">Behance</a>
+          <a class="chip" href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </section>
 
+    <!-- Experience -->
+    <section id="work">
+      <h2>Experience</h2>
+      <h3>Social Media Manager <span style="color:var(--muted);font-weight:600">(2021 – 2024)</span></h3>
+      <ul>
+        <li>Voicehell x Avalon — Social Media Manager (2021–2022)</li>
+        <li>Chastenes Movement — Social Media Manager (2021–2023)</li>
+        <li>GodShroom Band — Social Media Manager (2019–2022)</li>
+        <li>Purwokerto Death Metal — Social Media Manager (2024)</li>
+      </ul>
+
+      <h3>Event Organizer &amp; Creative Support <span style="color:var(--muted);font-weight:600">(2021 – Present)</span></h3>
+      <ul>
+        <li>Kaki Gunung Fest — Runner, Event Planner</li>
+        <li>Voicehell — Graphic Designer, Motion Designer, Sound Designer</li>
+        <li>Danar Widianto Bersenja Gurau — Graphic Designer, Motion Designer</li>
+        <li>Chastenes Movement — Graphic Designer, Motion Designer, Audio Engineer</li>
+        <li>Rock Aroma Live Record — Camera &amp; Footage Management</li>
+        <li>Purwokerto Death Metal — Secretary, Graphic &amp; Motion Designer</li>
+        <li>Djarum LA Hoopla — Event Planner</li>
+        <li>Basecamp Space Café &amp; Live Music — Graphic Designer, Audio Engineer, Event Planner</li>
+        <li>Super Music | Dare to Perform — Graphic Designer, Event Planner, Audio Engineer</li>
+      </ul>
+    </section>
+
+    <!-- Business -->
+    <section id="business">
+      <h2>Business Services</h2>
+      <h3>LVRA Studio — Digital Creative Services <span style="color:var(--muted);font-weight:600">(Owner, 2023–Present)</span></h3>
+      <p>Providing branding, motion graphics, and media production.</p>
+    </section>
+
+    <!-- Works -->
     <section id="works">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <h2>My Works</h2>
         <span class="tag">Click a menu to expand</span>
       </div>
 
+      <!-- Design Graphics (posters) -->
       <details class="gallery">
         <summary>Design Graphics</summary>
         <div class="gallery-body">
           <div class="masonry" id="gallery-posters">
+
             <figure>
-              <a href="https://www.behance.net/gallery/237676395/Music-Event-Poster" target="_blank" rel="noopener">
-                <img class="thumb-auto" src="assets/posters/poster1.jpg" alt="Poster 1" />
+              <a class="card-wrapper" href="https://www.behance.net/gallery/237676395/Music-Event-Poster" target="_blank" rel="noopener" aria-label="Open poster 1 on Behance">
+                <img src="assets/posters/poster1.jpg" alt="Poster 1" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%271067%27><rect width=100%25 height=100%25 fill=%27%23222%27/><text x=50%25 y=50%25 font-size=20 fill=%27%23aaa%27 text-anchor=middle alignment-baseline=middle>Poster+not+found</text></svg>'" />
               </a>
               <figcaption class="cap">Music Event Poster — Behance</figcaption>
             </figure>
 
             <figure>
-              <a href="https://www.behance.net/gallery/237676311/Music-Event-Poster" target="_blank" rel="noopener">
-                <img class="thumb-auto" src="assets/posters/poster2.jpg" alt="Poster 2" />
+              <a class="card-wrapper" href="https://www.behance.net/gallery/237676311/Music-Event-Poster" target="_blank" rel="noopener" aria-label="Open poster 2 on Behance">
+                <img src="assets/posters/poster2.jpg" alt="Poster 2" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%271067%27><rect width=100%25 height=100%25 fill=%27%23222%27/><text x=50%25 y=50%25 font-size=20 fill=%27%23aaa%27 text-anchor=middle alignment-baseline=middle>Poster+not+found</text></svg>'" />
               </a>
               <figcaption class="cap">Music Event Poster — Behance</figcaption>
             </figure>
 
             <figure>
-              <a href="https://www.behance.net/gallery/237676349/Music-Event-Poster" target="_blank" rel="noopener">
-                <img class="thumb-auto" src="assets/posters/poster3.jpg" alt="Poster 3" />
+              <a class="card-wrapper" href="https://www.behance.net/gallery/237676349/Music-Event-Poster" target="_blank" rel="noopener" aria-label="Open poster 3 on Behance">
+                <img src="assets/posters/poster3.jpg" alt="Poster 3" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%271067%27><rect width=100%25 height=100%25 fill=%27%23222%27/><text x=50%25 y=50%25 font-size=20 fill=%27%23aaa%27 text-anchor=middle alignment-baseline=middle>Poster+not+found</text></svg>'" />
               </a>
               <figcaption class="cap">Music Event Poster — Behance</figcaption>
             </figure>
 
             <figure>
-              <a href="https://www.behance.net/gallery/237676265/Music-Event-Poster" target="_blank" rel="noopener">
-                <img class="thumb-auto" src="assets/posters/poster4.jpg" alt="Poster 4" />
+              <a class="card-wrapper" href="https://www.behance.net/gallery/237676265/Music-Event-Poster" target="_blank" rel="noopener" aria-label="Open poster 4 on Behance">
+                <img src="assets/posters/poster4.jpg" alt="Poster 4" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%271067%27><rect width=100%25 height=100%25 fill=%27%23222%27/><text x=50%25 y=50%25 font-size=20 fill=%27%23aaa%27 text-anchor=middle alignment-baseline=middle>Poster+not+found</text></svg>'" />
               </a>
               <figcaption class="cap">Music Event Poster — Behance</figcaption>
             </figure>
 
             <figure>
-              <a href="https://www.behance.net/gallery/237676219/Music-Event-Poster" target="_blank" rel="noopener">
-                <img class="thumb-auto" src="assets/posters/poster5.jpg" alt="Poster 5" />
+              <a class="card-wrapper" href="https://www.behance.net/gallery/237676219/Music-Event-Poster" target="_blank" rel="noopener" aria-label="Open poster 5 on Behance">
+                <img src="assets/posters/poster5.jpg" alt="Poster 5" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%271067%27><rect width=100%25 height=100%25 fill=%27%23222%27/><text x=50%25 y=50%25 font-size=20 fill=%27%23aaa%27 text-anchor=middle alignment-baseline=middle>Poster+not+found</text></svg>'" />
               </a>
               <figcaption class="cap">Music Event Poster — Behance</figcaption>
             </figure>
 
             <figure>
-              <a href="https://www.behance.net/gallery/237676113/Company-t-shirt-design" target="_blank" rel="noopener">
-                <img class="thumb-auto" src="assets/posters/poster6.jpg" alt="T-Shirt Design" />
+              <a class="card-wrapper" href="https://www.behance.net/gallery/237676113/Company-t-shirt-design" target="_blank" rel="noopener" aria-label="Open poster 6 on Behance">
+                <img src="assets/posters/poster6.jpg" alt="T-Shirt Design" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%271067%27><rect width=100%25 height=100%25 fill=%27%23222%27/><text x=50%25 y=50%25 font-size=20 fill=%27%23aaa%27 text-anchor=middle alignment-baseline=middle>Poster+not+found</text></svg>'" />
               </a>
               <figcaption class="cap">Company T-shirt Design — Behance</figcaption>
             </figure>
 
             <figure>
-              <a href="https://www.behance.net/gallery/237675775/Spolin-Dukes-Prison-Poetry-Contest-Announcement" target="_blank" rel="noopener">
-                <img class="thumb-auto" src="assets/posters/poster7.jpg" alt="Poster 7" />
+              <a class="card-wrapper" href="https://www.behance.net/gallery/237675775/Spolin-Dukes-Prison-Poetry-Contest-Announcement" target="_blank" rel="noopener" aria-label="Open poster 7 on Behance">
+                <img src="assets/posters/poster7.jpg" alt="Poster 7" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%271067%27><rect width=100%25 height=100%25 fill=%27%23222%27/><text x=50%25 y=50%25 font-size=20 fill=%27%23aaa%27 text-anchor=middle alignment-baseline=middle>Poster+not+found</text></svg>'" />
               </a>
               <figcaption class="cap">Spolin Dukes Poster — Behance</figcaption>
             </figure>
+
           </div>
         </div>
       </details>
 
+      <!-- Motion Graphics -->
       <details class="gallery">
         <summary>Motion Graphics</summary>
         <div class="gallery-body">
           <div class="slider" data-gallery="motion">
             <div class="slider-viewport" id="gallery-motion">
+
               <figure class="card">
-                <img class="thumb lb" src="assets/motion/motion1.jpg" alt="Motion 01" data-full="https://www.youtube.com/watch?v=MCGaalzSTSQ" />
-                <figcaption class="cap">Motion – 01 · <a href="https://www.youtube.com/watch?v=MCGaalzSTSQ" target="_blank">Watch</a></figcaption>
+                <button class="motion-card lb" data-full="https://www.youtube.com/watch?v=MCGaalzSTSQ" aria-label="Open Motion 1">
+                  <img src="assets/motion/motion1.jpg" alt="Motion 1" />
+                  <span class="play-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v18l15-9z"/></svg></span>
+                </button>
+                <figcaption class="cap">Motion – 01 · <a href="https://www.youtube.com/watch?v=MCGaalzSTSQ" target="_blank" rel="noopener">Watch</a></figcaption>
               </figure>
 
               <figure class="card">
-                <img class="thumb lb" src="assets/motion/motion2.jpg" alt="Motion 02" data-full="https://www.youtube.com/watch?v=xhc2SEhIdkY" />
-                <figcaption class="cap">Motion – 02 · <a href="https://www.youtube.com/watch?v=xhc2SEhIdkY" target="_blank">Watch</a></figcaption>
+                <button class="motion-card lb" data-full="https://www.youtube.com/watch?v=xhc2SEhIdkY" aria-label="Open Motion 2">
+                  <img src="assets/motion/motion2.jpg" alt="Motion 2" />
+                  <span class="play-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v18l15-9z"/></svg></span>
+                </button>
+                <figcaption class="cap">Motion – 02 · <a href="https://www.youtube.com/watch?v=xhc2SEhIdkY" target="_blank" rel="noopener">Watch</a></figcaption>
               </figure>
 
               <figure class="card">
-                <img class="thumb lb" src="assets/motion/motion3.jpg" alt="Motion 03" data-full="https://youtube.com/shorts/sF5WvZSIhk0?si=JJa-pJwkidWV95rq" />
-                <figcaption class="cap">Motion – 03 · <a href="https://youtube.com/shorts/sF5WvZSIhk0?si=JJa-pJwkidWV95rq" target="_blank">Watch</a></figcaption>
+                <button class="motion-card lb" data-full="https://youtube.com/shorts/sF5WvZSIhk0?si=JJa-pJwkidWV95rq" aria-label="Open Motion 3">
+                  <img src="assets/motion/motion3.jpg" alt="Motion 3" />
+                  <span class="play-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v18l15-9z"/></svg></span>
+                </button>
+                <figcaption class="cap">Motion – 03 · <a href="https://youtube.com/shorts/sF5WvZSIhk0?si=JJa-pJwkidWV95rq" target="_blank" rel="noopener">Watch</a></figcaption>
               </figure>
 
               <figure class="card">
-                <a href="https://www.instagram.com/reel/DPbULLQgeAH/" target="_blank">
-                  <img class="thumb" src="assets/motion/motion4.jpg" alt="Instagram Reel" />
+                <a class="motion-card" href="https://www.instagram.com/reel/DPbULLQgeAH/" target="_blank" rel="noopener" aria-label="Open IG Reel">
+                  <img src="assets/motion/motion4.jpg" alt="IG Reel" />
+                  <span class="play-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v18l15-9z"/></svg></span>
                 </a>
-                <figcaption class="cap">Motion – IG Reel · <a href="https://www.instagram.com/reel/DPbULLQgeAH/" target="_blank">Open</a></figcaption>
+                <figcaption class="cap">Motion – IG Reel · <a href="https://www.instagram.com/reel/DPbULLQgeAH/" target="_blank" rel="noopener">Open</a></figcaption>
               </figure>
+
             </div>
+
             <div class="slider-nav">
-              <button class="slider-btn prev" aria-label="Previous">‹</button>
+              <button class="slider-btn prev" aria-label="Prev">‹</button>
               <button class="slider-btn next" aria-label="Next">›</button>
             </div>
-            <div class="slider-dots"></div>
+            <div class="slider-dots" aria-hidden="true"></div>
           </div>
         </div>
       </details>
+
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <div style="background:var(--panel);border:1px solid var(--line);padding:16px;border-radius:14px">
+        <form action="mailto:yafizain.work@gmail.com" method="GET">
+          <div style="display:grid;gap:12px">
+            <div style="display:grid;gap:6px">
+              <label style="color:var(--muted)">Your Name</label>
+              <input type="text" name="subject" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink)">
+            </div>
+            <div style="display:grid;gap:6px">
+              <label style="color:var(--muted)">Email</label>
+              <input type="email" name="cc" placeholder="you@example.com" required style="padding:10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink)">
+            </div>
+            <div style="display:grid;gap:6px">
+              <label style="color:var(--muted)">Message</label>
+              <textarea name="body" placeholder="Tell me about your project…" required style="min-height:120px;padding:10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink)"></textarea>
+            </div>
+            <button type="submit" style="appearance:none;border:1px solid var(--line);background:var(--accent);color:var(--bg);border-radius:999px;padding:10px 16px;cursor:pointer">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- YouTube -->
+    <section id="youtube">
+      <h2>YouTube</h2>
+      <p>Visit my channel: <a href="https://www.youtube.com/@les-laplaciens" target="_blank" rel="noopener">www.youtube.com/@les-laplaciens</a></p>
     </section>
 
     <section id="footnote">
@@ -247,63 +285,135 @@
     </section>
   </main>
 
-  <dialog id="lightbox">
+  <!-- Lightbox -->
+  <dialog id="lightbox" aria-label="Media preview">
     <div class="lb-head">
       <strong id="lb-title">Preview</strong>
-      <button class="btn" id="lb-close">Close</button>
+      <button class="btn" id="lb-close" aria-label="Close">Close</button>
     </div>
-    <div class="lb-body">
-      <img id="lb-image" class="lb-img" alt="Preview" style="display:none" />
-      <video id="lb-video" class="lb-img" controls style="display:none"></video>
-    </div>
+    <div class="lb-body"></div>
   </dialog>
 
   <script>
-    // Year
-    (function(){var y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();})();
+    // fill year
+    (function(){var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();})();
 
-    // Lightbox
-    const dlg=document.getElementById('lightbox');
-    const lbImg=document.getElementById('lb-image');
-    const lbVid=document.getElementById('lb-video');
-    const lbTitle=document.getElementById('lb-title');
-    function isYouTube(u){return /(?:youtube\.com|youtu\.be)/i.test(u);}
-    function youtubeEmbed(u){const m=u.match(/(?:v=|shorts\/|youtu\.be\/)([\w-]{4,})/);return m?`https://www.youtube.com/embed/${m[1]}?autoplay=1&rel=0`:null;}
-    function openLightbox(src,alt){
-      alt=alt||'';
-      const container=dlg.querySelector('.lb-body');
-      const old=container.querySelector('iframe');if(old)old.remove();
-      lbImg.style.display='none';lbVid.style.display='none';
+    // lightbox helpers
+    const dlg = document.getElementById('lightbox');
+    const container = dlg.querySelector('.lb-body');
+    function isYouTube(u){ return /(?:youtube\.com|youtu\.be)/i.test(u); }
+    function youtubeEmbed(u){
+      const m = u.match(/(?:v=|shorts\/|youtu\.be\/)([\w-]{4,})/);
+      return m ? 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&rel=0' : null;
+    }
+    function isVimeo(u){ return /vimeo\.com\/\d+/i.test(u); }
+    function vimeoEmbed(u){ const m=u.match(/vimeo\.com\/(\d+)/); return m ? 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1' : null; }
+
+    function openLightbox(src, alt){
+      alt = alt || '';
+      container.innerHTML = '';
+      if(/behance\.net|instagram\.com/i.test(src)){
+        window.open(src, '_blank', 'noopener');
+        return;
+      }
       if(isYouTube(src)){
-        const iframe=document.createElement('iframe');
-        iframe.src=youtubeEmbed(src);
-        iframe.allow='autoplay; fullscreen';iframe.style.width='100%';iframe.style.height='min(62vh,560px)';
+        const iframe = document.createElement('iframe');
+        iframe.src = youtubeEmbed(src);
+        iframe.frameBorder = 0;
+        iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.style.width = '100%'; iframe.style.height = 'min(62vh,560px)';
         container.appendChild(iframe);
-        lbTitle.textContent=alt||'Video';
-        dlg.showModal();return;
+        dlg.showModal();
+        document.getElementById('lb-title').textContent = alt || 'Video';
+        return;
+      }
+      if(isVimeo(src)){
+        const iframe = document.createElement('iframe');
+        iframe.src = vimeoEmbed(src);
+        iframe.frameBorder = 0;
+        iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.style.width = '100%'; iframe.style.height = 'min(62vh,560px)';
+        container.appendChild(iframe);
+        dlg.showModal();
+        document.getElementById('lb-title').textContent = alt || 'Video';
+        return;
       }
       if(/\.(mp4|webm|ogg)$/i.test(src)){
-        lbVid.src=src;lbVid.style.display='block';lbVid.play().catch(()=>{});lbTitle.textContent=alt||'Video';dlg.showModal();return;
+        const video = document.createElement('video');
+        video.controls = true; video.autoplay = true;
+        video.style.width = '100%';
+        video.src = src;
+        container.appendChild(video);
+        dlg.showModal();
+        document.getElementById('lb-title').textContent = alt || 'Video';
+        return;
       }
-      lbImg.src=src;lbImg.style.display='block';lbTitle.textContent=alt||'Image';dlg.showModal();
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = alt || 'Image';
+      img.className = 'lb-img';
+      img.style.width = '100%';
+      container.appendChild(img);
+      dlg.showModal();
+      document.getElementById('lb-title').textContent = alt || 'Image';
     }
+
     function closeLightbox(){
-      try{dlg.close();}catch{dlg.removeAttribute('open');}
-      lbVid.pause&&lbVid.pause();lbVid.removeAttribute('src');
-      const old=dlg.querySelector('iframe');if(old)old.remove();
-      lbImg.style.display='none';
+      try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); }
+      container.innerHTML = '';
     }
-    document.getElementById('lb-close').addEventListener('click',closeLightbox);
-    dlg.addEventListener('click',e=>{if(e.target===dlg)closeLightbox();});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
-    document.addEventListener('click',e=>{
-      const t=e.target.closest&&e.target.closest('.lb,[data-full]');
-      if(!t)return;
-      let src=t.getAttribute('data-full')||t.src;
-      openLightbox(src,t.alt||'');
-      e.preventDefault();
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    dlg.addEventListener('click', e => { if(e.target === dlg) closeLightbox(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+    // Click handler: support motion button[data-full], anchor-to-youtube/vimeo, img[data-full]
+    document.addEventListener('click', (e) => {
+      // motion buttons with data-full
+      const btn = e.target.closest && e.target.closest('.lb[data-full]');
+      if(btn){
+        const src = btn.getAttribute('data-full');
+        openLightbox(src, '');
+        e.preventDefault();
+        return;
+      }
+      // anchors linking to youtube/vimeo (not target=_blank)
+      const a = e.target.closest && e.target.closest('a[href]');
+      if(a && /youtube\.com|youtu\.be|vimeo\.com/i.test(a.href) && a.getAttribute('target') !== '_blank'){
+        openLightbox(a.href, '');
+        e.preventDefault();
+        return;
+      }
+      // images with data-full
+      const img = e.target.closest && e.target.closest('img[data-full]');
+      if(img){
+        openLightbox(img.getAttribute('data-full'), img.alt || '');
+        e.preventDefault();
+        return;
+      }
+      // allow other anchors (Behance/IG) to open in new tab as intended
     });
 
-    // Slider
-    function initSlider(s){
-      const v=s.querySelector('.
+    // Slider init
+    function initSlider(slider){
+      const viewport = slider.querySelector('.slider-viewport');
+      const cards = [...viewport.querySelectorAll('.card')];
+      const prev = slider.querySelector('.prev');
+      const next = slider.querySelector('.next');
+      const dotsBox = slider.querySelector('.slider-dots');
+      function perView(){ if(cards.length===0) return 1; const cardW = cards[0].getBoundingClientRect().width||1; const vw = viewport.clientWidth||1; return Math.max(1, Math.round(vw/cardW)); }
+      function pages(){ return Math.max(1, Math.ceil(cards.length/perView())); }
+      function pageIndex(){ const vw = viewport.clientWidth; const idx = Math.round(viewport.scrollLeft / vw); return Math.min(pages()-1, Math.max(0, idx)); }
+      function go(delta){ const vw = viewport.clientWidth; viewport.scrollBy({left: delta * vw, behavior: 'smooth'}); }
+      prev && prev.addEventListener('click', ()=> go(-1));
+      next && next.addEventListener('click', ()=> go(1));
+      function buildDots(){ dotsBox.innerHTML=''; const p=pages(); for(let i=0;i<p;i++){ const d=document.createElement('button'); d.className='dot'; d.type='button'; d.addEventListener('click', ()=>{ viewport.scrollTo({left: i * viewport.clientWidth, behavior:'smooth'}); }); dotsBox.appendChild(d);} updateDots(); }
+      function updateDots(){ const idx = pageIndex(); [...dotsBox.children].forEach((el,i)=> el.classList.toggle('active', i===idx)); }
+      viewport.addEventListener('scroll', ()=>{ if(viewport._raf) cancelAnimationFrame(viewport._raf); viewport._raf = requestAnimationFrame(updateDots); }, {passive:true});
+      const ro = new ResizeObserver(()=>{ buildDots(); }); ro.observe(viewport); buildDots();
+    }
+    document.querySelectorAll('.slider').forEach(initSlider);
+  </script>
+</body>
+</html>
