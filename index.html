@@ -16,19 +16,66 @@
       --line:#1e2230;
       --halo:22 27 40;
     }
-    body{margin:0;font:16px/1.65 'Poppins',system-ui;background:radial-gradient(circle at 50% 50%, rgb(var(--halo)/0.55) 0%, rgb(var(--halo)/0.35) 35%, rgb(var(--halo)/0) 70%),var(--bg);color:var(--ink)}
+
+    /* Reset + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font:16px/1.65 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(circle at 50% 50%, rgb(var(--halo)/0.55) 0%, rgb(var(--halo)/0.35) 35%, rgb(var(--halo)/0) 70%),
+        var(--bg);
+      color:var(--ink);
+    }
     a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
     .wrap{max-width:980px;margin:0 auto;padding:32px 20px 56px}
     .topbar{display:flex;justify-content:flex-end;margin-bottom:8px}
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;margin-bottom:22px}
-    @media(min-width:640px){.hero{grid-template-columns:130px 1fr}}
-    .avatar{width:114px;height:114px;border-radius:50%;object-fit:cover;border:2px solid var(--line);background:var(--panel)}
+    /* HERO — fixed column sizing to avoid overlap */
+    .hero{
+      display:grid;
+      /* Use a stable column for avatar that matches avatar width.
+         'min-content' ensures it won't collapse smaller than avatar */
+      grid-template-columns: min-content 1fr;
+      gap:16px;
+      align-items:center;
+      margin-bottom:22px;
+    }
+
+    /* Avatar sizes chosen to match the column and be responsive.
+       This ensures the avatar will never overflow its column. */
+    .avatar{
+      width:96px;
+      height:96px;
+      border-radius:50%;
+      object-fit:cover;
+      border:2px solid var(--line);
+      background:var(--panel);
+      display:block;
+      flex-shrink:0;
+    }
+    @media(min-width:640px){
+      .hero{grid-template-columns:130px 1fr}
+      .avatar{width:130px;height:130px}
+    }
+
+    .hero h1{font-weight:800;margin:0;font-size:clamp(26px,4.5vw,36px)}
     .role{color:var(--muted);margin:0 0 8px}
     .info-list{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px 16px;color:var(--muted)}
+    .info-list li{display:flex;align-items:center;gap:6px}
     .socials{margin-top:10px;display:flex;flex-wrap:wrap;gap:10px}
-    .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line);border-radius:999px}
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink)}
+
+    /* Sections */
+    header{display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px 12px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:24px}
+    section{padding:18px 0 12px;border-bottom:1px dashed var(--line)}
+    section:last-of-type{border-bottom:0}
+    h2{margin:10px 0 10px;font-size:22px}
+    h3{margin:12px 0 6px;font-size:18px}
+    .meta{color:var(--muted);font-weight:600}
+    .pill{display:inline-block;font-size:12px;padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
 
     /* Galleries */
     details.gallery{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:14px 0;overflow:hidden}
@@ -56,7 +103,8 @@
     .play-overlay svg{width:22px;height:22px;fill:var(--accent)}
 
     /* Slider */
-    .slider-viewport{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 10px}
+    .slider{position:relative}
+    .slider-viewport{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:10px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 10px}
     @media(min-width:640px){.slider-viewport{grid-auto-columns:calc((100% - 10px)/2)}}
     @media(min-width:900px){.slider-viewport{grid-auto-columns:calc((100% - 20px)/3)}}
     .card{scroll-snap-align:start}
@@ -72,38 +120,87 @@
     .lb-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line)}
     .lb-body{padding:8px 12px 14px}
     .lb-img{width:100%;height:auto;border-radius:10px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    @media(max-width:480px){.wrap{padding:18px 14px 48px}}
+    /* Contact & inputs */
+    .contact{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .input, .textarea{width:100%;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;padding:10px 12px;font:inherit}
+    .textarea{min-height:120px;resize:vertical}
+    .cta{appearance:none;border:1px solid var(--line);background:var(--accent);color:var(--bg);border-radius:999px;padding:10px 16px;cursor:pointer;font-weight:700}
+
+    @media(max-width:480px){
+      .wrap{padding:18px 14px 48px}
+      /* On very small screens stack hero items and center them */
+      .hero{grid-template-columns:1fr; text-align:center; justify-items:center; gap:12px}
+      .info-list{justify-content:center}
+      .socials{justify-content:center}
+    }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <!-- Hero -->
-    <section class="hero">
-      <img class="avatar" src="assets/potrait.jpg" alt="Yafi Zain" />
+    <div class="topbar" aria-hidden="true"></div>
+
+    <!-- HERO -->
+    <section id="hero" class="hero" aria-label="Hero">
+      <img class="avatar" src="assets/potrait.jpg" alt="Portrait of Yafi Zain" />
       <div>
         <h1>Yafi Zain</h1>
-        <p class="role">Hello, you can call me Yafizain. My life has been enriched with explorations in the realm of science and technology intertwined with art.</p>
-        <ul class="info-list">
-          <li>Purwokerto, Indonesia</li>
-          <li><a href="tel:+6281225705615">+62-812-2570-5615</a></li>
-          <li><a href="mailto:yafizain.work@gmail.com">yafizain.work@gmail.com</a></li>
-          <li><a href="https://www.youtube.com/@les-laplaciens" target="_blank" rel="noopener">YouTube Channel</a></li>
+        <p class="role">Hello, you can call me Yafizain. My life has been enriched with explorations in the realm of science and technology intertwined with art. Since my teenage years I have delved into science fiction writing, creating artwork, animation, and video editing. Extreme music is a constant inspiration.</p>
+
+        <ul class="info-list" aria-hidden="false">
+          <li>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 21s-7-5.4-7-10a7 7 0 1 1 14 0c0 4.6-7 10-7 10z"/></svg>
+            Purwokerto, Indonesia
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/></svg>
+            <a href="tel:+6281225705615">+62-812-2570-5615</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3,7 12,13 21,7"/></svg>
+            <a href="mailto:yafizain.work@gmail.com">yafizain.work@gmail.com</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+            <a href="https://www.youtube.com/@les-laplaciens" target="_blank" rel="noopener">YouTube Channel</a>
+          </li>
         </ul>
-        <div class="socials">
-          <a class="chip" href="mailto:yafizain.work@gmail.com">Email</a>
-          <a class="chip" href="https://wa.me/6281225705615?text=Hi%20Yafi" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="chip" href="https://www.instagram.com/_yafizain/" target="_blank" rel="noopener">Instagram</a>
-          <a class="chip" href="https://www.behance.net/yafizain" target="_blank" rel="noopener">Behance</a>
-          <a class="chip" href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+
+        <div class="socials" aria-label="Social links">
+          <a class="chip" href="mailto:yafizain.work@gmail.com" aria-label="Email">Email</a>
+          <a class="chip" href="https://wa.me/6281225705615?text=Hi%20Yafi" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+          <a class="chip" href="https://www.instagram.com/_yafizain/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+          <a class="chip" href="https://www.behance.net/yafizain" target="_blank" rel="noopener" aria-label="Behance">Behance</a>
         </div>
       </div>
     </section>
 
+    <!-- Skills header -->
+    <header>
+      <h2>Skills</h2>
+      <span class="pill">Graphic Design · Motion Graphics · Video Editing · Audio Engineering</span>
+    </header>
+
+    <!-- Tools -->
+    <section id="skills" aria-label="Tools">
+      <h2>Tools</h2>
+      <div class="socials" aria-label="Tools I use" style="font-size:13px;gap:6px 8px">
+        <span class="chip">• GIMP</span>
+        <span class="chip">• Adobe Photoshop</span>
+        <span class="chip">• After Effects</span>
+        <span class="chip">• Premiere Pro</span>
+        <span class="chip">• DaVinci Resolve</span>
+        <span class="chip">• Procreate</span>
+        <span class="chip">• LMMS</span>
+        <span class="chip">• Logic Pro</span>
+      </div>
+    </section>
+
     <!-- Experience -->
-    <section id="work">
+    <section id="work" aria-label="Experience">
       <h2>Experience</h2>
-      <h3>Social Media Manager <span style="color:var(--muted);font-weight:600">(2021 – 2024)</span></h3>
+      <h3>Social Media Manager <span class="meta">(2021 – 2024)</span></h3>
       <ul>
         <li>Voicehell x Avalon — Social Media Manager (2021–2022)</li>
         <li>Chastenes Movement — Social Media Manager (2021–2023)</li>
@@ -111,7 +208,7 @@
         <li>Purwokerto Death Metal — Social Media Manager (2024)</li>
       </ul>
 
-      <h3>Event Organizer &amp; Creative Support <span style="color:var(--muted);font-weight:600">(2021 – Present)</span></h3>
+      <h3>Event Organizer &amp; Creative Support <span class="meta">(2021 – Present)</span></h3>
       <ul>
         <li>Kaki Gunung Fest — Runner, Event Planner</li>
         <li>Voicehell — Graphic Designer, Motion Designer, Sound Designer</li>
@@ -126,14 +223,25 @@
     </section>
 
     <!-- Business -->
-    <section id="business">
+    <section id="business" aria-label="Business">
       <h2>Business Services</h2>
-      <h3>LVRA Studio — Digital Creative Services <span style="color:var(--muted);font-weight:600">(Owner, 2023–Present)</span></h3>
+      <h3>LVRA Studio — Digital Creative Services <span class="meta">(Owner, 2023–Present)</span></h3>
       <p>Providing branding, motion graphics, and media production.</p>
+
+      <h3>TRVE Darkness Prod — Shoe Treatments <span class="meta">(Owner, 2019–Present)</span></h3>
+      <p>Small business specializing in professional shoe care and restoration.</p>
+    </section>
+
+    <!-- Apprenticeship -->
+    <section id="apprenticeship" aria-label="Apprenticeship">
+      <h2>Apprenticeship</h2>
+      <ul>
+        <li>Asian WaterBird Census — Participant</li>
+      </ul>
     </section>
 
     <!-- Works -->
-    <section id="works">
+    <section id="works" aria-label="Works">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <h2>My Works</h2>
         <span class="tag">Click a menu to expand</span>
@@ -144,7 +252,6 @@
         <summary>Design Graphics</summary>
         <div class="gallery-body">
           <div class="masonry" id="gallery-posters">
-
             <figure>
               <a class="card-wrapper" href="https://www.behance.net/gallery/237676395/Music-Event-Poster" target="_blank" rel="noopener" aria-label="Open poster 1 on Behance">
                 <img src="assets/posters/poster1.jpg" alt="Poster 1" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%27800%27 height=%271067%27><rect width=100%25 height=100%25 fill=%27%23222%27/><text x=50%25 y=50%25 font-size=20 fill=%27%23aaa%27 text-anchor=middle alignment-baseline=middle>Poster+not+found</text></svg>'" />
@@ -193,7 +300,6 @@
               </a>
               <figcaption class="cap">Spolin Dukes Poster — Behance</figcaption>
             </figure>
-
           </div>
         </div>
       </details>
@@ -253,22 +359,22 @@
     <!-- Contact -->
     <section id="contact">
       <h2>Contact</h2>
-      <div style="background:var(--panel);border:1px solid var(--line);padding:16px;border-radius:14px">
+      <div class="contact">
         <form action="mailto:yafizain.work@gmail.com" method="GET">
           <div style="display:grid;gap:12px">
             <div style="display:grid;gap:6px">
-              <label style="color:var(--muted)">Your Name</label>
-              <input type="text" name="subject" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink)">
+              <label for="name" style="color:var(--muted)">Your Name</label>
+              <input id="name" class="input" type="text" name="subject" placeholder="Your name" required>
             </div>
             <div style="display:grid;gap:6px">
-              <label style="color:var(--muted)">Email</label>
-              <input type="email" name="cc" placeholder="you@example.com" required style="padding:10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink)">
+              <label for="email" style="color:var(--muted)">Email</label>
+              <input id="email" class="input" type="email" name="cc" placeholder="you@example.com" required>
             </div>
             <div style="display:grid;gap:6px">
-              <label style="color:var(--muted)">Message</label>
-              <textarea name="body" placeholder="Tell me about your project…" required style="min-height:120px;padding:10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink)"></textarea>
+              <label for="message" style="color:var(--muted)">Message</label>
+              <textarea id="message" class="textarea" name="body" placeholder="Tell me about your project…" required></textarea>
             </div>
-            <button type="submit" style="appearance:none;border:1px solid var(--line);background:var(--accent);color:var(--bg);border-radius:999px;padding:10px 16px;cursor:pointer">Send Message</button>
+            <button class="cta" type="submit">Send Message</button>
           </div>
         </form>
       </div>
@@ -295,104 +401,69 @@
   </dialog>
 
   <script>
-    // fill year
-    (function(){var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();})();
+    // Fill year
+    (function(){ var y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear(); })();
 
-    // lightbox helpers
+    // Lightbox helpers
     const dlg = document.getElementById('lightbox');
     const container = dlg.querySelector('.lb-body');
+
     function isYouTube(u){ return /(?:youtube\.com|youtu\.be)/i.test(u); }
-    function youtubeEmbed(u){
-      const m = u.match(/(?:v=|shorts\/|youtu\.be\/)([\w-]{4,})/);
-      return m ? 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&rel=0' : null;
-    }
+    function youtubeEmbed(u){ const m = u.match(/(?:v=|shorts\/|youtu\.be\/)([\w-]{4,})/); return m ? 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&rel=0' : null; }
     function isVimeo(u){ return /vimeo\.com\/\d+/i.test(u); }
     function vimeoEmbed(u){ const m=u.match(/vimeo\.com\/(\d+)/); return m ? 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1' : null; }
 
     function openLightbox(src, alt){
       alt = alt || '';
       container.innerHTML = '';
-      if(/behance\.net|instagram\.com/i.test(src)){
-        window.open(src, '_blank', 'noopener');
-        return;
-      }
+      if(/behance\.net|instagram\.com/i.test(src)){ window.open(src, '_blank', 'noopener'); return; }
       if(isYouTube(src)){
         const iframe = document.createElement('iframe');
         iframe.src = youtubeEmbed(src);
-        iframe.frameBorder = 0;
-        iframe.allow = 'autoplay; fullscreen; picture-in-picture';
-        iframe.allowFullscreen = true;
+        iframe.frameBorder = 0; iframe.allow = 'autoplay; fullscreen; picture-in-picture'; iframe.allowFullscreen = true;
         iframe.style.width = '100%'; iframe.style.height = 'min(62vh,560px)';
         container.appendChild(iframe);
-        dlg.showModal();
         document.getElementById('lb-title').textContent = alt || 'Video';
-        return;
+        dlg.showModal(); return;
       }
       if(isVimeo(src)){
         const iframe = document.createElement('iframe');
         iframe.src = vimeoEmbed(src);
-        iframe.frameBorder = 0;
-        iframe.allow = 'autoplay; fullscreen; picture-in-picture';
-        iframe.allowFullscreen = true;
+        iframe.frameBorder = 0; iframe.allow = 'autoplay; fullscreen; picture-in-picture'; iframe.allowFullscreen = true;
         iframe.style.width = '100%'; iframe.style.height = 'min(62vh,560px)';
         container.appendChild(iframe);
-        dlg.showModal();
         document.getElementById('lb-title').textContent = alt || 'Video';
-        return;
+        dlg.showModal(); return;
       }
-      if(/\.(mp4|webm|ogg)$/i.test(src)){
+      if(/\.(mp4|webm|ogg)(\?.*)?$/i.test(src)){
         const video = document.createElement('video');
-        video.controls = true; video.autoplay = true;
-        video.style.width = '100%';
-        video.src = src;
+        video.controls = true; video.autoplay = true; video.style.width = '100%'; video.src = src;
         container.appendChild(video);
-        dlg.showModal();
         document.getElementById('lb-title').textContent = alt || 'Video';
-        return;
+        dlg.showModal(); return;
       }
       const img = document.createElement('img');
-      img.src = src;
-      img.alt = alt || 'Image';
-      img.className = 'lb-img';
-      img.style.width = '100%';
+      img.src = src; img.alt = alt || 'Image'; img.className = 'lb-img'; img.style.width = '100%';
       container.appendChild(img);
-      dlg.showModal();
       document.getElementById('lb-title').textContent = alt || 'Image';
+      dlg.showModal();
     }
 
-    function closeLightbox(){
-      try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); }
-      container.innerHTML = '';
-    }
+    function closeLightbox(){ try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); } container.innerHTML = ''; }
     document.getElementById('lb-close').addEventListener('click', closeLightbox);
-    dlg.addEventListener('click', e => { if(e.target === dlg) closeLightbox(); });
-    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+    dlg.addEventListener('click', (e)=>{ if(e.target === dlg) closeLightbox(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLightbox(); });
 
-    // Click handler: support motion button[data-full], anchor-to-youtube/vimeo, img[data-full]
+    // Click handling: motion buttons with data-full, anchors to youtube/vimeo, images with data-full
     document.addEventListener('click', (e) => {
-      // motion buttons with data-full
       const btn = e.target.closest && e.target.closest('.lb[data-full]');
-      if(btn){
-        const src = btn.getAttribute('data-full');
-        openLightbox(src, '');
-        e.preventDefault();
-        return;
-      }
-      // anchors linking to youtube/vimeo (not target=_blank)
+      if(btn){ openLightbox(btn.getAttribute('data-full'), ''); e.preventDefault(); return; }
+
       const a = e.target.closest && e.target.closest('a[href]');
-      if(a && /youtube\.com|youtu\.be|vimeo\.com/i.test(a.href) && a.getAttribute('target') !== '_blank'){
-        openLightbox(a.href, '');
-        e.preventDefault();
-        return;
-      }
-      // images with data-full
+      if(a && /youtube\.com|youtu\.be|vimeo\.com/i.test(a.href) && a.getAttribute('target') !== '_blank'){ openLightbox(a.href, ''); e.preventDefault(); return; }
+
       const img = e.target.closest && e.target.closest('img[data-full]');
-      if(img){
-        openLightbox(img.getAttribute('data-full'), img.alt || '');
-        e.preventDefault();
-        return;
-      }
-      // allow other anchors (Behance/IG) to open in new tab as intended
+      if(img){ openLightbox(img.getAttribute('data-full'), img.alt || ''); e.preventDefault(); return; }
     });
 
     // Slider init
@@ -402,16 +473,23 @@
       const prev = slider.querySelector('.prev');
       const next = slider.querySelector('.next');
       const dotsBox = slider.querySelector('.slider-dots');
-      function perView(){ if(cards.length===0) return 1; const cardW = cards[0].getBoundingClientRect().width||1; const vw = viewport.clientWidth||1; return Math.max(1, Math.round(vw/cardW)); }
-      function pages(){ return Math.max(1, Math.ceil(cards.length/perView())); }
+
+      function perView(){ if(cards.length === 0) return 1; const cardW = cards[0].getBoundingClientRect().width || 1; const vw = viewport.clientWidth || 1; return Math.max(1, Math.round(vw / cardW)); }
+      function pages(){ return Math.max(1, Math.ceil(cards.length / perView())); }
       function pageIndex(){ const vw = viewport.clientWidth; const idx = Math.round(viewport.scrollLeft / vw); return Math.min(pages()-1, Math.max(0, idx)); }
       function go(delta){ const vw = viewport.clientWidth; viewport.scrollBy({left: delta * vw, behavior: 'smooth'}); }
+
       prev && prev.addEventListener('click', ()=> go(-1));
       next && next.addEventListener('click', ()=> go(1));
-      function buildDots(){ dotsBox.innerHTML=''; const p=pages(); for(let i=0;i<p;i++){ const d=document.createElement('button'); d.className='dot'; d.type='button'; d.addEventListener('click', ()=>{ viewport.scrollTo({left: i * viewport.clientWidth, behavior:'smooth'}); }); dotsBox.appendChild(d);} updateDots(); }
+
+      function buildDots(){ dotsBox.innerHTML = ''; const p = pages(); for(let i=0;i<p;i++){ const d = document.createElement('button'); d.className = 'dot'; d.type = 'button'; d.addEventListener('click', ()=>{ viewport.scrollTo({left: i * viewport.clientWidth, behavior:'smooth'}); }); dotsBox.appendChild(d); } updateDots(); }
       function updateDots(){ const idx = pageIndex(); [...dotsBox.children].forEach((el,i)=> el.classList.toggle('active', i===idx)); }
+
       viewport.addEventListener('scroll', ()=>{ if(viewport._raf) cancelAnimationFrame(viewport._raf); viewport._raf = requestAnimationFrame(updateDots); }, {passive:true});
-      const ro = new ResizeObserver(()=>{ buildDots(); }); ro.observe(viewport); buildDots();
+
+      const ro = new ResizeObserver(()=>{ buildDots(); });
+      ro.observe(viewport);
+      buildDots();
     }
     document.querySelectorAll('.slider').forEach(initSlider);
   </script>
